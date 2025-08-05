@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai Global LLC - Air Duct Cleaning and Indoor Air Quality Solutions</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.9/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.foxycart.com/bai-global/loader.js" async defer></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #1a2e5e;
+            background-color: #f9f9f9;
+        }
+        .header-bg, .service-bg, .store-bg, .review-bg, .payment-policy-bg {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+        }
+        .service-bg {
+            background: #e3f2fd;
+        }
+        .store-bg {
+            background: #f5f5f5;
+        }
+        .review-bg {
+            background: #e8eaf6;
+        }
+        .payment-policy-bg {
+            background: #ffffff;
+        }
+        .btn-primary {
+            background-color: #1976d2;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #1565c0;
+            transform: scale(1.05);
+        }
+        .btn-add-to-cart {
+            background-color: #1976d2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-add-to-cart:hover {
+            background-color: #1565c0;
+            transform: scale(1.05);
+        }
+        .service-card, .store-item, .review-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .service-card .content {
+            padding: 20px;
+            color: #1a2e5e;
+        }
+        .service-card img, .store-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .review-card {
+            padding: 20px;
+        }
+        .review-card img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .contact-info, .contact-form {
+            max-width: 500px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .contact-form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .policy-content {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .policy-content h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a2e5e;
+        }
+        .policy-content p {
+            font-size: 1em;
+            color: #333;
+            line-height: 1.6;
+        }
+        .booking-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .booking-modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .booking-modal-content input, .booking-modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .booking-modal-content textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .foxy-cart {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            z-index: 1000;
+        }
+        .payment-logos img {
+            width: 60px;
+            height: auto;
+            margin: 0 10px;
+        }
+        .payment-policies {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .payment-policies h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a2e5e;
+        }
+        .payment-policies p {
+            font-size: 1em;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 640px) {
+            .payment-logos img {
+                width: 50px;
+                margin: 0 5px;
+            }
+            .payment-policies {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const NavBar = () => {
+            const [isBookingOpen, setIsBookingOpen] = React.useState(false);
+
+            return (
+                <nav className="bg-gray-900 text-white p-4 flex justify-between items-center fixed w-full z-10">
+                    <div className="text-xl font-bold">Bai Global LLC</div>
+                    <div className="flex space-x-4 items-center">
+                        {['Home', 'About', 'Store', 'Services', 'Reviews', 'Contact'].map((section) => (
+                            <a key={section} href={`#${section.toLowerCase()}`} className="hover:text-gray-300">{section}</a>
+                        ))}
+                        <a href="https://bai-global.foxycart.com/cart?cart=view" className="text-white hover:text-gray-300">View Cart</a>
+                    </div>
+                    {isBookingOpen && (
+                        <div className="booking-modal">
+                            <div className="booking-modal-content">
+                                <h2 className="text-xl mb-4 font-bold text-gray-800">Book an Appointment</h2>
+                                <input type="text" placeholder="Name" className="border p-2 mb-2 w-full" />
+                                <input type="text" placeholder="Phone Number" className="border p-2 mb-2 w-full" />
+                                <textarea placeholder="Describe your issue" className="border p-2 mb-2 w-full"></textarea>
+                                <div className="flex justify-end space-x-2">
+                                    <button onClick={() => setIsBookingOpen(false)} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                                    <button className="btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        const Header = () => (
+            <div className="header-bg pt-20 flex flex-col items-center">
+                <div className="text-center p-4">
+                    <h1 className="text-5xl font-bold text-gray-800">Air Duct Cleaning and Indoor Air Quality Solutions</h1>
+                    <p className="text-lg mt-4 text-gray-600">Transform your home's air quality with our expert air duct cleaning and innovative purification solutions. Enjoy fresh, clean air all year round.</p>
+                </div>
+                <div className="mt-4">
+                    <img src="https://transform.octanecdn.com/width/1600/https://octanecdn.com/zrengine/zrengine_466696223.jpg" alt="Air Duct Cleaning" className="w-full max-w-md rounded shadow-lg" />
+                </div>
+            </div>
+        );
+
+        const About = () => (
+            <section id="about" className="p-8">
+                <h2 className="text-4xl font-bold mb-6 text-gray-800">About Us</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Bai Global LLC has been providing top-notch air duct cleaning and indoor air quality solutions for over 5 years. 
+                    With more than 1000 satisfied clients, 90% of whom return to us and recommend our services to their friends and family, 
+                    we pride ourselves on delivering exceptional results and improving the air quality in homes and businesses.
+                </p>
+            </section>
+        );
+
+        const Services = () => (
+            <section id="services" className="service-bg">
+                <h2 className="text-4xl font-bold mb-6 text-gray-800">Our Services</h2>
+                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                        { name: 'Air Duct Cleaning', desc: 'Utilizing advanced equipment and techniques, we thoroughly clean your air ducts to remove dust, debris, and contaminants, promoting better airflow and reducing allergens.', img: 'https://elevation-mechanical.com/wp-content/uploads/2024/06/how-air-ducts-are-cleaned-and-why-you-should-have-a-pro-do-it.jpg' },
+                        { name: 'Dryer Vent Cleaning', desc: 'Prevent fire hazards and improve dryer efficiency with professional vent cleaning.', img: 'https://www.trustcolliers.com/blog/wp-content/uploads/2017/03/duct-cleaning-with-vacuum.jpg' },
+                        { name: 'HVAC Maintenance', desc: 'Keep your HVAC system running smoothly with regular maintenance.', img: 'https://www.tritechenergy.com/wp-content/uploads/2023/01/Is-Regular-Commercial-HVAC-Maintenance-Necessary_.jpg' },
+                        { name: 'Indoor Air Quality Testing', desc: 'Assess and improve the air quality in your home or office.', img: 'https://incredibleresolution.com/imageservice/20241112215327.jpg' },
+                    ].map((service) => (
+                        <div key={service.name} className="service-card">
+                            <div className="content">
+                                <h3 className="text-2xl font-bold mb-2">{service.name}</h3>
+                                <p className="text-gray-600 mb-4">{service.desc}</p>
+                            </div>
+                            <img src={service.img} alt={service.name} />
+                        </div>
+                    ))}
+                </div>
+            </section>
+        );
+
+        const Store = () => {
+            const items = [
+                { name: 'Air Purifier', desc: 'High-efficiency air purifier for cleaner indoor air.', price: 199.99, img: 'https://i5.walmartimages.com/seo/ALROCKET-Air-Purifier-with-HEPA-Filter-for-Home-Remove-99-9-Smoke-Dust-Allergies-for-300-SQ-ft_e8111fa1-f2a9-4c0d-9f9c-4f5399c352da.f659bd27a28fbf490c24cd07e6d208c1.jpeg' },
+                { name: 'HEPA Filter', desc: 'Replacement HEPA filter for air purifiers.', price: 49.99, img: 'https://www.airtecnics.com/media/webstructure/news/filtre-hepa-en.jpg' },
+                { name: 'Vent Cleaning Kit', desc: 'DIY vent cleaning kit for home use.', price: 29.99, img: 'https://m.media-amazon.com/images/I/81oWc8+JzML.jpg' },
+                { name: 'Air Quality Monitor', desc: 'Monitor indoor air quality in real-time.', price: 89.99, img: 'https://www.ato.com/content/images/thumbs/0006499_home-air-quality-monitor-pm25pm10pm10co2tvoctemperaturehumidity_550.jpeg' },
+                { name: 'UV Air Sanitizer', desc: 'Eliminate airborne pathogens with UV technology.', price: 149.99, img: 'https://www.newcocoffee.com/wp-content/uploads/2021/11/UVC-1_web.jpg' },
+                { name: 'Dehumidifier', desc: 'Reduce humidity and prevent mold growth.', price: 249.99, img: 'https://www.bhg.com/thmb/zpADcyBsX3cs7Ad8zUoCia5gbxw=/4000x2667/filters:no_upscale()/BHG-How-to-Clean-a-Dehumidifier-Primary-01-25b7c3ceb974496bafe8ed2cacf05960.jpg' },
+            ];
+
+            return (
+                <section id="store" className="store-bg">
+                    <h2 className="text-4xl font-bold mb-6 text-gray-800">Store</h2>
+                    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {items.map((item) => (
+                            <div key={item.name} className="store-item">
+                                <img src={item.img} alt={item.name} className="mb-4" />
+                                <h3 className="text-xl font-bold mb-2">{item.name}</h3>
+                                <p className="text-gray-600 mb-2">{item.desc}</p>
+                                <p className="font-bold text-gray-800 mb-2">${item.price}</p>
+                                <a
+                                    href={`https://bai-global.foxycart.com/cart?name=${encodeURIComponent(item.name)}&price=${item.price}&image=${encodeURIComponent(item.img)}`}
+                                    className="btn-add-to-cart w-full fc-item"
+                                    data-fc-id={item.name.replace(/\s+/g, '-').toLowerCase()}
+                                >
+                                    Add to Cart
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            );
+        };
+
+        const PaymentPolicies = () => (
+            <section id="payment-policies" className="payment-policy-bg">
+                <h2 className="text-4xl font-bold mb-6 text-gray-800">Payment Methods & Policies</h2>
+                <div className="payment-logos flex justify-center space-x-4 mb-6">
+                    <img src="https://www.visa.com/content/dam/VCOM/global/brand/logos/visa-logo-blue.png" alt="Visa" />
+                    <img src="https://www.mastercard.com/content/dam/mccom/global/brandcenter/mastercard-logo-blue.png" alt="Mastercard" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Cash_App_Logo.png" alt="Cash App" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Credit-cards.svg/320px-Credit-cards.svg.png" alt="Credit/Debit Card" />
+                </div>
+                <div className="payment-policies">
+                    <h3>Refund Policy</h3>
+                    <p>We offer a 30-day refund policy for all products purchased from our store. Items must be unused, in their original packaging, and returned with proof of purchase. Refunds are processed within 10 business days upon receipt of the returned item. Shipping costs are non-refundable. Contact us at (818) 747-4036 or info@baiglobal.com for assistance.</p>
+                    <h3>Cancellation Policy</h3>
+                    <p>Orders can be canceled within 24 hours of purchase for a full refund. For service bookings, cancellations must be made at least 48 hours before the scheduled appointment to avoid a cancellation fee. To cancel, contact us at (818) 747-4036 or info@baiglobal.com. A confirmation email will be sent upon cancellation.</p>
+                    <h3>Privacy Policy</h3>
+                    <p>At Bai Global LLC, we collect only the personal information necessary to process your orders and improve our services, such as your name, email, and payment details. We do not share your data with third parties except as required by law or to fulfill service obligations. You can review or request deletion of your data by contacting info@baiglobal.com.</p>
+                </div>
+            </section>
+        );
+
+        const Reviews = () => (
+            <section id="reviews" className="review-bg">
+                <h2 className="text-4xl font-bold mb-6 text-gray-800">What Our Customers Say</h2>
+                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                        { name: 'Daniel W.', review: 'Outstanding service! They efficiently cleaned and sanitized all our vents, removing all dust and dirt. Their attention to detail was impressive. I definitely recommend them to anyone needing duct cleaning.' },
+                        { name: 'Emily R.', review: 'Suidui Air Care did an amazing job cleaning our air ducts! The technicians were punctual, professional, and thorough. They left the air in our home noticeably fresher, and the difference was immediately noticeable. Highly recommend!' },
+                        { name: 'David Brown', review: 'I was extremely pleased with the professionalism and expertise of Suidui Air Care technicians. They cleaned our vents and furnace thoroughly and even resolved an unexpected issue with our heating system promptly. Fantastic experience!' },
+                    ].map((review) => (
+                        <div key={review.name} className="review-card">
+                            <div className="flex items-center mb-4">
+                                <div>
+                                    <p className="font-bold">{review.name}</p>
+                                    <div className="flex text-yellow-500">
+                                        {[...Array(5)].map((_, i) => <span key={i}>★</span>)}
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="text-gray-600">{review.review}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        );
+
+        const Contact = () => {
+            const [selectedPolicy, setSelectedPolicy] = React.useState(null);
+            const [isBookingOpen, setIsBookingOpen] = React.useState(false);
+
+            const policies = {
+                '/privacy': `
+                        Privacy Policy
+                        
+                    At Bai Global LLC, we are committed to protecting your privacy. We collect personal information only to provide and improve our services. This includes your name, email, and contact details when you use our contact form or make a purchase. We do not share your information with third parties except as required by law or to fulfill service obligations. You can review or request deletion of your data by contacting us at info@baiglobal.com.
+                `,
+                '/return': `
+                        Return Policy
+    
+                    We offer a 30-day return policy for all products purchased from our store. Items must be unused, in their original packaging, and returned with proof of purchase. Refunds will be processed within 10 business days upon receipt of the returned item. Shipping costs are non-refundable. For more details, contact us at (818) 747 4036.
+                `,
+                '/terms': `
+                        Terms and Conditions
+                    
+                    By using our website and services, you agree to these terms. This includes accepting our pricing, payment terms, and use of our content for personal use only. We reserve the right to modify these terms at any time. Disputes will be governed by the laws of California. For full details, reach out to us at info@baiglobal.com.
+                `
+            };
+
+            return (
+                <section id="contact" className="p-12 bg-gray-100">
+                    <h2 className="text-5xl font-bold mb-8 text-gray-800">Reach Out to Us</h2>
+                    <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center">
+                        <div className="contact-form w-full md:w-1/2">
+                            <h3 className="text-2xl font-semibold mb-4 text-gray-800 text-center">Get in Touch</h3>
+                            <input type="text" placeholder="Your Name" className="border p-2 mb-2 w-full" required />
+                            <input type="email" placeholder="Your Email" className="border p-2 mb-2 w-full" required />
+                            <textarea placeholder="How can we assist you?" className="border p-2 mb-2 w-full h-24" required></textarea>
+                            <button className="btn-primary w-full py-2">Send Message</button>
+                            <button onClick={() => setIsBookingOpen(true)} className="btn-primary w-full mt-4 py-2">Book Now</button>
+                        </div>
+                    </div>
+                    <div className="max-w-7xl mx-auto mt-8 text-center">
+                        <p className="text-lg mb-2"><strong>Address:</strong> 550 N Figueroa St Apt 5043, Los Angeles, CA 90012</p>
+                        <p className="text-lg"><strong>Phone:</strong> <a href="tel:(213)876-3486" className="text-blue-500 hover:underline">(818) 747 4036</a></p>
+                    </div>
+                    {isBookingOpen && (
+                        <div className="booking-modal">
+                            <div className="booking-modal-content">
+                                <h2 className="text-xl mb-4 font-bold text-gray-800">Book an Appointment</h2>
+                                <input type="text" placeholder="Name" className="border p-2 mb-2 w-full" />
+                                <input type="text" placeholder="Phone Number" className="border p-2 mb-2 w-full" />
+                                <textarea placeholder="Describe your issue" className="border p-2 mb-2 w-full"></textarea>
+                                <div className="flex justify-end space-x-2">
+                                    <button onClick={() => setIsBookingOpen(false)} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                                    <button className="btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    <div className="mt-8 text-center">
+                        <div className="flex justify-center space-x-6 mb-4">
+                            <a href="#" onClick={(e) => { e.preventDefault(); setSelectedPolicy('/privacy'); }} className="hover:text-gray-300 text-lg">Privacy Policy</a>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setSelectedPolicy('/return'); }} className="hover:text-gray-300 text-lg">Return Policy</a>
+                            <a href="#" onClick={(e) => { e.preventDefault(); setSelectedPolicy('/terms'); }} className="hover:text-gray-300 text-lg">Terms and Conditions</a>
+                        </div>
+                        {selectedPolicy && <div className="policy-content" dangerouslySetInnerHTML={{ __html: policies[selectedPolicy].replace(/\n/g, '<br>') }} />}
+                    </div>
+                </section>
+            );
+        };
+
+        const Footer = () => (
+            <footer className="bg-gray-900 text-white p-6 text-center">
+                <p className="text-lg">© 2025 Bai Global LLC. All rights reserved.</p>
+            </footer>
+        );
+
+        const App = () => (
+            <div className="text-center">
+                <NavBar />
+                <Header />
+                <About />
+                <Services />
+                <Store />
+                <PaymentPolicies />
+                <Reviews />
+                <Contact />
+                <Footer />
+            </div>
+        );
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
